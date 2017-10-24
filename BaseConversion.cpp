@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
-int decimalToBinary(int num)
+int decimalToAny(long long int num,int db)
 {
-    int rem,result=0,i=1;
+    long long int rem,result=0,i=1;
     while(num!=0)
     {
-        rem=num%2;
-        num=num/2;
+        rem=num%db;
+        num=num/db;
         result=result+(rem*i);
         i=i*10;
     }
@@ -35,5 +35,7 @@ int main()
    int db;
    long long int num;
    cin>>sb>>db>>num;
-   cout<<anyToDecimal(num,sb);
+   long long int ans=anyToDecimal(num,sb);
+   long long int finalAns=decimalToAny(ans,db);
+   cout<<finalAns;
 }
