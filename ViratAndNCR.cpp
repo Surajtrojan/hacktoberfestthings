@@ -27,8 +27,7 @@ ll nChooseR(ll n,ll r)
     {
         fact[i] = fact[i-1]*i%m;
     }
-    return ((fact[n]%m)* ((modularInverse(fact[r], m)) % m) *((modularInverse(fact[n-r], m) % m)) )% m;
-}
+    return (((fact[n]%m)* ((modularInverse(fact[r], m)) % m))%m *((modularInverse(fact[n-r], m) % m)) )% m;
 int main()
 {
     ll n,r;
