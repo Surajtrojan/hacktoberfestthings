@@ -1,38 +1,61 @@
 #include<bits/stdc++.h>
 using namespace std;
-
 int main()
 {
-      stack<double> stk;
-      cout<<"Enter the postfix expression to be evaluated"<<"\n";
-      string postfix;
-      cin>>postfix;
-      for(int i=0;i<postfix.size();i++)
-      {
-
-            if(postfix[i]=='+'||postfix[i]=='*'||postfix[i]=='-'||postfix[i]=='/')
+    stack<int> myStack;
+    string postfix;
+    cout<<"Enter the postfix expression"<<endl;
+    getline(cin,postfix);
+    string temp="";
+    for(int i=0;i<postfix.length();i++)
+    {
+        if(postfix[i]=='+')
+        {
+            int a=myStack.top();
+            myStack.pop();
+            int b=myStack.top();
+            myStack.pop();
+            myStack.push(b+a);
+        }
+        else if(postfix[i]=='-')
+        {
+            int a=myStack.top();
+            myStack.pop();
+            int b=myStack.top();
+            myStack.pop();
+            myStack.push(b-a);
+        }
+        else if(postfix[i]=='/')
+        {
+            int a=myStack.top();
+            myStack.pop();
+            int b=myStack.top();
+            myStack.pop();
+            myStack.push(b/a);
+        }
+        else if(postfix[i]=='*')
+        {
+            int a=myStack.top();
+            myStack.pop();
+            int b=myStack.top();
+            myStack.pop();
+            myStack.push(b*a);
+        }
+        else if(postfix[i]==' ')
+        {
+            /// Ignore
+        }
+        else
+        {
+            while(postfix[i]!=' ' && i!=postfix.length())
             {
-                  double A = stk.top();
-                  stk.pop();
-                  double B = stk.top();
-                  stk.pop();
-                  if(postfix[i]=='+')
-                        stk.push(B+A);
-                  else if(postfix[i]=='-')
-                        stk.push(B-A);
-                  else if(postfix[i]=='*')
-                        stk.push(B*A);
-                  else if(postfix[i]=='/')
-                  {
-                        double temp = B/A;
-                        stk.push(temp);
-                  }
+                temp=temp+postfix[i];
+                i++;
             }
-            else
-                  stk.push((postfix[i] - '0'));
-      }
-      double ans = stk.top();
-      cout<<ans;
-
-      return 0;
+            myStack.push(atoi(temp.c_str()));
+            temp="";
+            i--;
+        }
+    }
+    cout<<"Final ans is: "<<myStack.top()<<endl;
 }
